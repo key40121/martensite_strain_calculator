@@ -58,14 +58,24 @@ class Window(QWidget):
         self.widget_mirror_index.addItems([str(i) for i in range(3, 21)])
         
 
-        # ColorBar
+        # Settings for figure and colorBar 
         self.widget_label_contour = QLabel("The number of level")
         self.widget_contour = QComboBox(self)
         self.widget_contour.addItems([str(i) for i in range(10, 51)])
+        
+        self.widget_label_line_style = QLabel("Line style")
+        self.widget_line_style = QComboBox(self)
+        self.widget_line_style.addItems(["solid", "dotted", "dashed", "dashdot"])
+        
+        self.widget_label_line_width = QLabel("Line width")
+        self.widget_line_width  = QLineEdit(self)
+        self.widget_line_width.setText("1.5")
+        
         self.widget_color_bar = QComboBox(self)
         self.widget_color_bar.addItems(["jet", "hsv", "CMRmap", "GnBu", "RdBu", 
                                                     "Spectral", "afmhot", "coolwarm", "gnuplot",
                                                     "terrain" ])
+        
         self.widget_color_bar_2 = QComboBox(self)
         self.widget_color_bar_2.addItems(["Vertical", "Horizontal"])
 
@@ -100,6 +110,10 @@ class Window(QWidget):
         hbox_3.addWidget(self.widget_label_contour)
         hbox_3.addWidget(self.widget_label_contour)
         hbox_3.addWidget(self.widget_contour)
+        hbox_3.addWidget(self.widget_label_line_style)
+        hbox_3.addWidget(self.widget_line_style)
+        hbox_3.addWidget(self.widget_label_line_width)
+        hbox_3.addWidget(self.widget_line_width)
         hbox_3.addWidget(self.widget_color_bar)
         hbox_3.addWidget(self.widget_color_bar_2)
 
@@ -118,11 +132,13 @@ class Window(QWidget):
     
     def start_calculation(self):
 
-        # show a  
+        # show all selected settings
         print(self.widget_crystal.currentText())
         print(self.widget_experiment_mode.currentText())
         print(self.widget_mirror_index.currentText())
         print(self.widget_contour.currentText())
+        print(self.widget_line_style.currentText())
+        print(self.widget_line_width.text())
         print(self.widget_color_bar.currentText())
         print(self.widget_color_bar_2.currentText())
 
@@ -133,6 +149,8 @@ class Window(QWidget):
 
         mirror_index_used = int(self.widget_mirror_index.currentText())
         contour_number = int(self.widget_contour.currentText())
+        line_style = self.widget_line_style.currentText()
+        line_width = float(self.widget_line_width.text())
         cmap = self.widget_color_bar.currentText()
         
         # Implementation
@@ -145,10 +163,17 @@ class Window(QWidget):
             transformation_mode = crystal.tensile_strain
         else:
             transformation_mode = crystal.compression_strain
+            
+        if self.widget_experiment_mode.currentText() == "Vertical":
+            cbar_vertical = True
+        else:
+            cbar_vertical = False
 
         xyz = dp.coordinate_contour_triangle(mirror_index.mirror_indices_list(), transformation_mode)
-        fig.imshow_contour_triangle(xyz, xlim=(0, 0.42), ylim=(0, 0.42), cmap=cmap, 
-                    contour_number=contour_number, plot_label=False, hide_axis=True)
+        fig.imshow_contour_triangle(xyz, xlim=(0, 0.42), ylim=(0, 0.42), 
+                                    cmap=cmap, contour_number=contour_number, 
+                                    line_style=line_style, line_width=line_width,
+                                    plot_label=False, hide_axis=True)
 
 
 def main():

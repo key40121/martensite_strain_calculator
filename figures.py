@@ -1,3 +1,4 @@
+import math
 import numpy as np
 import matplotlib.pyplot as plt 
 from mpl_toolkits.axes_grid1 import make_axes_locatable
@@ -5,6 +6,9 @@ import math
 
 
 def imshow_xy_coordinate(point = np.array([1, 1, 1]), figsize=(15, 12), hide_axis=False):
+    """
+    Create a xy coordinates system including a single mirror index.
+    """
 
     fig = plt.figure(figsize=(15, 12))
     ax = fig.add_subplot(1, 1, 1)
@@ -19,35 +23,41 @@ def imshow_xy_coordinate(point = np.array([1, 1, 1]), figsize=(15, 12), hide_axi
 
 def imshow_xy_coordinates(x_coordinate, y_coordinate, figsize=(15, 12),
                              hide_axis=False, plot_label=False):
+    """
+    Create a xy coordinates system including mirror indices.
+    """
+
         
-        fig = plt.figure(figsize=(15, 12))
-        ax = fig.add_subplot(1, 1, 1)
+    fig = plt.figure(figsize=(15, 12))
+    ax = fig.add_subplot(1, 1, 1)
         
-        ax.scatter(x_coordinate, y_coordinate)
+    ax.scatter(x_coordinate, y_coordinate)
         
-        if plot_label:
-            """
-            This algorithm is so bad. 
-            """
-            annotations = all_indices[1:]
-            temp_list = []
+    if plot_label:
+        """
+        This algorithm is so bad. 
+        """
+        annotations = all_indices[1:]
+        temp_list = []
             
-            for i in range(1, len(annotations)):
+        for i in range(1, len(annotations)):
                 
-                if not([math.floor(1000*x_coordinate[i]), math.floor(1000*y_coordinate[i])] in temp_list):
+            if not([math.floor(1000*x_coordinate[i]), math.floor(1000*y_coordinate[i])] in temp_list):
                     
-                    ax.annotate(annotations[i], (x_coordinate[i], y_coordinate[i]))
-                    temp_list.append([math.floor(1000*x_coordinate[i]), math.floor(1000*y_coordinate[i])])
+                ax.annotate(annotations[i], (x_coordinate[i], y_coordinate[i]))
+                temp_list.append([math.floor(1000*x_coordinate[i]), math.floor(1000*y_coordinate[i])])
         
-        ax.set_aspect('equal')
-        ax.set_xlim(0, 1)
-        ax.set_ylim(0, 1)
+    ax.set_aspect('equal')
+    ax.set_xlim(0, 1)
+    ax.set_ylim(0, 1)
         
 
-def imshow_contour(mirror_index_list, coordinate, figsize=(15, 12),  
-xlim=(0,1), ylim=(0,1),
-marker=False, cmap=plt.cm.jet, 
-hide_axis=False, plot_label=False):
+def imshow_contour(mirror_index_list, coordinate, figsize=(15, 12), 
+                   xlim=(0,1), ylim=(0,1), marker=False, 
+                   cmap=plt.cm.jet, hide_axis=False, plot_label=False):
+    """
+    Create a xy coordinate system and a contour map on it
+    """
 
     x = coordinate[0]
     y = coordinate[1]
@@ -103,9 +113,12 @@ hide_axis=False, plot_label=False):
     
     
 def imshow_contour_triangle(coordinate, figsize=(15, 12),  
-xlim=(0,0.42), ylim=(0,0.42),
-cmap="jet", contour_number=20,
-hide_axis=False, plot_label=False, cbar_vertical=True, ):
+                            xlim=(0,0.42), ylim=(0,0.42), cmap="jet", 
+                            contour_number=20, line_style="solid", line_width=1.5,
+                            hide_axis=False,  plot_label=False, cbar_vertical=True):
+    """
+    Create 
+    """
 
     x = coordinate[0]
     y = coordinate[1]
@@ -115,10 +128,10 @@ hide_axis=False, plot_label=False, cbar_vertical=True, ):
     ax = fig.add_subplot(1, 1, 1)
 
 # Drawing a contour
-    ax.tricontour(x,y,z,
-                   contour_number,             
-                   linewidths=0.3, 
-                   linestyles='dotted',
+    ax.tricontour(x,y,z, 
+                  contour_number,             
+                   linewidths=line_width, 
+                   linestyles=line_style,
                    colors='black'
                   )
 
@@ -131,11 +144,13 @@ hide_axis=False, plot_label=False, cbar_vertical=True, ):
     
 # Creating colorbar and fix the size of it based on the actual size of the triangle 
     divider = make_axes_locatable(ax)
-    cax = divider.append_axes("right", size="5%", pad=0.5)
+    
 
     if cbar_vertical:
+        cax = divider.append_axes("right", size="5%", pad=0.5)
         fig.colorbar(cntr, ax=ax, cax=cax)
     else:
+        cax = divider.append_axes("bottom", size="5%", pad=0.5)
         fig.colorbar(cntr, ax=ax, cax=cax, orientation="horizontal")
 
 
