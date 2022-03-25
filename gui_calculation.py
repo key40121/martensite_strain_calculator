@@ -164,7 +164,7 @@ class Window(QWidget):
         else:
             transformation_mode = crystal.compression_strain
             
-        if self.widget_experiment_mode.currentText() == "Vertical":
+        if self.widget_color_bar_2.currentText() == "Vertical":
             cbar_vertical = True
         else:
             cbar_vertical = False
@@ -173,7 +173,7 @@ class Window(QWidget):
         fig.imshow_contour_triangle(xyz, xlim=(0, 0.42), ylim=(0, 0.42), 
                                     cmap=cmap, contour_number=contour_number, 
                                     line_style=line_style, line_width=line_width,
-                                    plot_label=False, hide_axis=True)
+                                    plot_label=False, hide_axis=True, cbar_vertical=cbar_vertical)
 
 
 def main():
