@@ -33,7 +33,7 @@ GUI option
 * PyQt5 5.15.6
 * qtmodern 0.2.0
 
-### Run main.py
+### Run main.py or gui_calculatioin.py
 You will get a contour figure of transformation strain that is similar with those two figures above. 
 
 ### Reference
