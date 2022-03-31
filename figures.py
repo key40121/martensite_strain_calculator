@@ -56,7 +56,7 @@ def imshow_contour(mirror_index_list, coordinate, figsize=(15, 12),
                    xlim=(0,1), ylim=(0,1), marker=False, 
                    cmap=plt.cm.jet, hide_axis=False, plot_label=False):
     """
-    Create a xy coordinate system and a contour map on it
+    Create a xy coordinate system and a contour map on it.
     """
 
     x = coordinate[0]
@@ -117,7 +117,7 @@ def imshow_contour_triangle(coordinate, figsize=(15, 12),
                             contour_number=20, line_style="solid", line_width=1.5,
                             hide_axis=False,  plot_label=False, cbar_vertical=True):
     """
-    Create 
+    Create a standard stereographic triangle contour based on the selected experimental mode. 
     """
 
     x = coordinate[0]
