@@ -1,3 +1,5 @@
+import sys
+
 from PyQt5.QtWidgets import *
 from PyQt5 import QtCore, QtGui
 from PyQt5.QtGui import *
@@ -5,8 +7,6 @@ from PyQt5.QtCore import *
 import qtmodern.styles
 import qtmodern.windows
   
-import sys
-
 from crystal import CubicToOrthorhombic
 from mirror_indices import MirrorIndex
 import figures as fig

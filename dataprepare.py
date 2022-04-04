@@ -1,6 +1,8 @@
+import math
+
 import numpy as np
 import sympy
-import math
+
 
 def coordinate_contour(mirror_index_list, crystal_strain):
     """
