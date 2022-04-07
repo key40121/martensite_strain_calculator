@@ -4,8 +4,6 @@ import numpy as np
 import matplotlib.pyplot as plt 
 from mpl_toolkits.axes_grid1 import make_axes_locatable
 
-
-
 def imshow_xy_coordinate(point = np.array([1, 1, 1]), figsize=(15, 12), hide_axis=False):
     """
     Create a xy coordinates system including a single mirror index.
@@ -19,8 +17,6 @@ def imshow_xy_coordinate(point = np.array([1, 1, 1]), figsize=(15, 12), hide_axi
     ax.set_aspect('equal')
     ax.set_xlim(0, 1)
     ax.set_ylim(0, 1)
-
-
 
 def imshow_xy_coordinates(x_coordinate, y_coordinate, figsize=(15, 12),
                              hide_axis=False, plot_label=False):
@@ -52,7 +48,6 @@ def imshow_xy_coordinates(x_coordinate, y_coordinate, figsize=(15, 12),
     ax.set_xlim(0, 1)
     ax.set_ylim(0, 1)
         
-
 def imshow_contour(mirror_index_list, coordinate, figsize=(15, 12), 
                    xlim=(0,1), ylim=(0,1), marker=False, 
                    cmap=plt.cm.jet, hide_axis=False, plot_label=False):
@@ -78,7 +73,7 @@ def imshow_contour(mirror_index_list, coordinate, figsize=(15, 12),
 # Painting between each line 
     cntr = ax.tricontourf(x,y,z,
                            20,             
-                           cmap=cmap  # RdBu_r=(Red,Blue), PuBu_r=(Purple,Blue)
+                           cmap=cmap  
                           )
     # Drawing a colorbar
     fig.colorbar(cntr, ax=ax)
@@ -111,7 +106,6 @@ def imshow_contour(mirror_index_list, coordinate, figsize=(15, 12),
         ax.axis("off")
 
     plt.show()
-    
     
 def imshow_contour_triangle(coordinate, figsize=(15, 12),  
                             xlim=(0,0.42), ylim=(0,0.42), cmap="jet", 
@@ -156,8 +150,8 @@ def imshow_contour_triangle(coordinate, figsize=(15, 12),
 
 
     if plot_label: # Plot mirror indices with marker dots.
+        
         # Remember mirror_index_list has [0 0 0] at the first element of the list
-
         annotations = [[0, 0, 1], [1, 0, 1], [1, 1, 1]]
         x = [0, 0.414213562373094, 0.366025403784438]
         y = [0, 0, 0.366025403784438]

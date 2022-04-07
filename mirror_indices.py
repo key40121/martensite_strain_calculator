@@ -59,6 +59,7 @@ class MirrorIndex():
 
         return x_coordinate, y_coordinate
 
+# Test
 def main():
     temp = MirrorIndex(3)
     print(temp.mirror_indices_list())

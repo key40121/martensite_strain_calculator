@@ -12,8 +12,6 @@ def coordinate_contour(mirror_index_list, crystal_strain):
     y_coordinate = []
     z_coordinate = []
     
-    
-    
     for i in range(1, len(mirror_index_list)):
         x_coordinate.append(mirror_index_to_xy(mirror_index_list[i])[0])
         y_coordinate.append(mirror_index_to_xy(mirror_index_list[i])[1])
@@ -50,14 +48,11 @@ def coordinate_contour_triangle(mirror_index_list, crystal_strain):
     y_coordinate = []
     z_coordinate = []
     
-    
     for i in range(1, len(mirror_index_list)):
         
         x_adding = mirror_index_to_xy(mirror_index_list[i])[0]
         y_adding = mirror_index_to_xy(mirror_index_list[i])[1]
         z_adding = crystal_strain(mirror_index_list[i]) * 100
-        
-
     
         A = np.array([-0.414213562373094, 0, 0], dtype=float)
         O = np.array([0, 0, -1], dtype=float)
